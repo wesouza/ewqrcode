@@ -1,7 +1,9 @@
 import React, { FormEvent, useState } from 'react';
 import { useQRCode } from 'next-qrcode';
 import styles from '../styles/styles.module.css'
-import { AiFillCopy, AiOutlineCloudDownload, AiOutlineWhatsApp } from "react-icons/ai";
+import {  AiOutlineCloudDownload  } from "react-icons/ai";
+import html2canvas from 'html2canvas';
+import { toast } from "react-toastify";
 
 
 
@@ -17,8 +19,33 @@ function Home() {
 
 async function urlQr(event: FormEvent) {
   event.preventDefault();
+  if(!url) {
+    return toast.error("Por favor informe uma url");
+  }
+   showOrHide()
 
-  showOrHide()
+}
+
+async function canva() {
+
+  if(!url) {
+    return toast.error("Por favor informe uma url");
+  }
+
+  html2canvas(document.getElementById("print-area")!).then(function(canvas) {
+    var anchorTag = document.createElement("a");
+    document.body.appendChild(anchorTag);
+    anchorTag.download = `QrCode${url}.png`;
+     anchorTag.href = canvas.toDataURL();
+     anchorTag.target = '_blank';
+     anchorTag.click();
+
+});
+
+
+
+  toast.success("Download realizado com sucesso!");
+
 
 }
 
@@ -39,33 +66,19 @@ async function urlQr(event: FormEvent) {
                 defaultValue={url}
                     onChange={(e)=> setUrl(e.target.value)} />
 
-          <button type='submit' >GERAR QRCODE</button>
+          <button className={styles.btn1} type='submit' >GERAR QRCODE</button>
          </form>
-          <h3>Compartilhar</h3>
           <div className={styles.shared}>
-            <button onClick={() => {
-                            navigator.clipboard.writeText(
-                              `${url}`
-                            );
-                            // toast.success("Link copiado com sucesso!");
-                          }}>
-            <p className={styles.p1}  >
-            <AiOutlineWhatsApp className={styles.icon}/> WhatsApp 
-            </p>
-            </button>
-        
-            
-            <p className={styles.p2} ><AiFillCopy className={styles.iconCopy}/> Copiar</p>
-          
-            <p className={styles.p4} >
+            <button className={styles.btn2}onClick={canva}><p className={styles.p1} >
             <AiOutlineCloudDownload className={styles.icon}/> Download 
-            </p>
+            </p></button>
           </div>
         </div>
           
         <div>
 
-        { showElement ? <Canvas
+        { showElement ? <div id='print-area'>
+          <Canvas
  text={` ${url}`}   
  options={{
         type: 'image/jpeg',
@@ -76,7 +89,9 @@ async function urlQr(event: FormEvent) {
         width: 200,
         
       }}
-    /> : null }
+     
+    />
+        </div> : null }
 
         
         </div>
@@ -85,6 +100,8 @@ async function urlQr(event: FormEvent) {
       
     </div>
   );
+
+  
 }
 
 export default Home;
