@@ -5,7 +5,7 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-  flex-direction: column ;
+  flex-direction: column;
 }
 
 .cardContainer {
@@ -14,11 +14,9 @@
   height: 300px;
   display: flex;
   justify-content: center;
-  flex-direction: row ;
+  flex-direction: row;
   align-items: center;
-
 }
-
 
 .cardContainer input {
   width: 100%;
@@ -35,52 +33,62 @@
   margin-top: 10px;
   padding: 10px 15px;
   border-radius: 3px;
-  border:none;
+  border: none;
   cursor: pointer;
   background: #00aaa5;
   font-size: 16px;
   font-weight: bold;
-  transition: all 0.5s ease
+  transition: all 0.5s ease;
+}
+
+.btn1:hover {
+  background: #016461e3;
+  color: #fff;
+}
+
+.btn2 {
+  border: none;
+  background: none;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.shared {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p1 {
+  cursor: pointer;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.icon,
+.iconCopy {
+  height: 30px;
+  width: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    background: rgb(228, 228, 228);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
   }
 
-  .btn1:hover {
-    
-    background: #016461e3;
-    color: #fff;
- 
-    }
-
-    .btn2 {
-      border: none;
-      background: none;
-      margin-top: 10px;
-      font-size: 16px;
-    }
-
-
-    .shared{
-      display: flex;
-     align-items: center;
-     justify-content: center;
-    }
-
-    .p1{
-      cursor: pointer;
-      align-items: center;
-      display: flex;
-      justify-content: center;
-    
-    }
-
-
-
-    .icon, .iconCopy{
-      height: 30px;
-      width: 30px;
-  
-
-    }
-
- 
-
-    
+  .cardContainer {
+    background: #fff;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+}
